@@ -52,7 +52,7 @@ class BarcodeTest extends \PHPUnit_Framework_TestCase
     public function testSetCustomAdapter()
     {
         $barcode = new Barcode([
-            'adapter' => $this->getMock('Zend\Validator\Barcode\AdapterInterface')
+            'adapter' => $this->getMockBuilder('Zend\Validator\Barcode\AdapterInterface')->getMock()
         ]);
 
         $this->assertInstanceOf('Zend\Validator\Barcode\AdapterInterface', $barcode->getAdapter());

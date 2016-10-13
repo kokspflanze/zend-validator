@@ -29,18 +29,21 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
     protected function getMockHasResult()
     {
         // mock the adapter, driver, and parts
-        $mockConnection = $this->getMock('Zend\Db\Adapter\Driver\ConnectionInterface');
+        $mockConnection = $this->getMockBuilder('Zend\Db\Adapter\Driver\ConnectionInterface')
+            ->getMock();
 
         // Mock has result
         $mockHasResultRow      = new ArrayObject();
         $mockHasResultRow->one = 'one';
 
-        $mockHasResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
+        $mockHasResult = $this->getMockBuilder('Zend\Db\Adapter\Driver\ResultInterface')
+            ->getMock();
         $mockHasResult->expects($this->any())
             ->method('current')
             ->will($this->returnValue($mockHasResultRow));
 
-        $mockHasResultStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
+        $mockHasResultStatement = $this->getMockBuilder('Zend\Db\Adapter\Driver\StatementInterface')
+            ->getMock();
         $mockHasResultStatement->expects($this->any())
             ->method('execute')
             ->will($this->returnValue($mockHasResult));
@@ -49,7 +52,8 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
             ->method('getParameterContainer')
             ->will($this->returnValue(new ParameterContainer()));
 
-        $mockHasResultDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockHasResultDriver = $this->getMockBuilder('Zend\Db\Adapter\Driver\DriverInterface')
+            ->getMock();
         $mockHasResultDriver->expects($this->any())
             ->method('createStatement')
             ->will($this->returnValue($mockHasResultStatement));
@@ -57,7 +61,10 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
             ->method('getConnection')
             ->will($this->returnValue($mockConnection));
 
-        return $this->getMock('Zend\Db\Adapter\Adapter', null, [$mockHasResultDriver]);
+        return $this->getMockBuilder('Zend\Db\Adapter\Adapter')
+            ->setMethods(null)
+            ->setConstructorArgs([$mockHasResultDriver])
+            ->getMock();
     }
 
     /**
@@ -68,14 +75,17 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
     protected function getMockNoResult()
     {
         // mock the adapter, driver, and parts
-        $mockConnection = $this->getMock('Zend\Db\Adapter\Driver\ConnectionInterface');
+        $mockConnection = $this->getMockBuilder('Zend\Db\Adapter\Driver\ConnectionInterface')
+            ->getMock();
 
-        $mockNoResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
+        $mockNoResult = $this->getMockBuilder('Zend\Db\Adapter\Driver\ResultInterface')
+            ->getMock();
         $mockNoResult->expects($this->any())
             ->method('current')
             ->will($this->returnValue(null));
 
-        $mockNoResultStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
+        $mockNoResultStatement = $this->getMockBuilder('Zend\Db\Adapter\Driver\StatementInterface')
+            ->getMock();
         $mockNoResultStatement->expects($this->any())
             ->method('execute')
             ->will($this->returnValue($mockNoResult));
@@ -84,7 +94,8 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
             ->method('getParameterContainer')
             ->will($this->returnValue(new ParameterContainer()));
 
-        $mockNoResultDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockNoResultDriver = $this->getMockBuilder('Zend\Db\Adapter\Driver\DriverInterface')
+            ->getMock();
         $mockNoResultDriver->expects($this->any())
             ->method('createStatement')
             ->will($this->returnValue($mockNoResultStatement));
@@ -92,7 +103,10 @@ class RecordExistsTest extends \PHPUnit_Framework_TestCase
             ->method('getConnection')
             ->will($this->returnValue($mockConnection));
 
-        return $this->getMock('Zend\Db\Adapter\Adapter', null, [$mockNoResultDriver]);
+        return $this->getMockBuilder('Zend\Db\Adapter\Adapter')
+            ->setMethods(null)
+            ->setConstructorArgs([$mockNoResultDriver])
+            ->getMock();
     }
 
     /**

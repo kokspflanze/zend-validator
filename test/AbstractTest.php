@@ -187,7 +187,8 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
     public function testTranslatorMethods()
     {
-        $translatorMock = $this->getMock('ZendTest\Validator\TestAsset\Translator');
+        $translatorMock = $this->getMockBuilder('ZendTest\Validator\TestAsset\Translator')
+            ->getMock();
         $this->validator->setTranslator($translatorMock, 'foo');
 
         $this->assertEquals($translatorMock, $this->validator->getTranslator());
@@ -207,7 +208,8 @@ class AbstractTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($this->validator->hasTranslator());
 
-        $translatorMock = $this->getMock('ZendTest\Validator\TestAsset\Translator');
+        $translatorMock = $this->getMockBuilder('ZendTest\Validator\TestAsset\Translator')
+            ->getMock();
         AbstractValidator::setDefaultTranslator($translatorMock, 'foo');
 
         $this->assertEquals($translatorMock, AbstractValidator::getDefaultTranslator());

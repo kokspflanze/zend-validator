@@ -235,7 +235,8 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
      */
     public function getValidatorTrue()
     {
-        $validator = $this->getMock('Zend\Validator\ValidatorInterface');
+        $validator = $this->getMockBuilder('Zend\Validator\ValidatorInterface')
+            ->getMock();
         $validator->expects($this->any())
             ->method('isValid')
             ->will($this->returnValue(true));
@@ -247,7 +248,8 @@ class ValidatorChainTest extends \PHPUnit_Framework_TestCase
      */
     public function getValidatorFalse()
     {
-        $validator = $this->getMock('Zend\Validator\ValidatorInterface');
+        $validator = $this->getMockBuilder('Zend\Validator\ValidatorInterface')
+            ->getMock();
         $validator->expects($this->any())
             ->method('isValid')
             ->will($this->returnValue(false));

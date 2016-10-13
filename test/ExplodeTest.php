@@ -54,7 +54,8 @@ class ExplodeTest extends \PHPUnit_Framework_TestCase
      */
     public function testExpectedBehavior($value, $delimiter, $breakOnFirst, $numIsValidCalls, $isValidReturn, $messages, $expects)
     {
-        $mockValidator = $this->getMock('Zend\Validator\ValidatorInterface');
+        $mockValidator = $this->getMockBuilder('Zend\Validator\ValidatorInterface')
+            ->getMock();
         $mockValidator->expects($this->exactly($numIsValidCalls))->method('isValid')->will($this->returnValue($isValidReturn));
         $mockValidator->expects($this->any())->method('getMessages')->will($this->returnValue('X'));
 
